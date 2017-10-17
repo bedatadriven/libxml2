@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.renjin</groupId>
+  <artifactId>renjin-libxml2</artifactId>
+  <version>0.1-SNAPSHOT</version>
+
+  <properties>
+    <renjin.version>0.9.0-SNAPSHOT</renjin.version>
+  </properties>
+  <repositories>
+    <repository>
+      <id>bedatadriven-public</id>
+      <url>
+        http://nexus.bedatadriven.com/content/groups/public/
+      </url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>bedatadriven-public</id>
+      <url>
+        http://nexus.bedatadriven.com/content/groups/public/
+      </url>
+    </pluginRepository>
+  </pluginRepositories>
+  
+  <distributionManagement>
+    <repository>
+      <id>renjin-packages</id>
+      <name>Renjin CI Repository</name>
+      <url>http://nexus.bedatadriven.com/content/repositories/renjin-packages</url>
+    </repository>
+  </distributionManagement>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.renjin</groupId>
+        <artifactId>gcc-bridge-maven-plugin</artifactId>
+        <version>${renjin.version}</version>
+        <executions>
+          <execution>
+            <id>configure</id>
+            <goals>
+              <goal>configure</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <configureArgs>
+                <arg>--without-icu</arg>
+                <arg>--without-zlib</arg>
+                <arg>--without-lzma</arg>
+		<arg>--without-python</arg>
+              </configureArgs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>make</id>
+            <goals>
+              <goal>make</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <packageName>org.renjin.libxml2</packageName> 
+            </configuration>
+          </execution>
+          <execution>
+            <id>headers</id>
+            <goals>
+              <goal>archive-headers</goal>
+            </goals>
+            <phase>prepare-package</phase>	
+            <configuration>
+              <includeDirectory>${basedir}/include</includeDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -4,9 +4,12 @@
 *.log
 *.pyc
 *.patch
+*.gimple
 .deps
 .libs
 .memdump
+bridge.so
+target/
 COPYING
 CVE-*
 INSTALL
