@@ -52,6 +52,7 @@
                 <arg>--without-zlib</arg>
                 <arg>--without-lzma</arg>
 		<arg>--without-python</arg>
+                <arg>--without-threads</arg>
               </configureArgs>
             </configuration>
           </execution>
